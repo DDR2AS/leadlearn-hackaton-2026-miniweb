@@ -18,6 +18,9 @@ La web (App Service) lee los archivos del contenedor con su **identidad administ
 
 ![Servicios desplegados de la app web](resources/servicios_desplegados_app_web.png)
 
+## Resultado final de los 2 mensajes subidos de la carpeta mensajes
+![output en Web](resources/mostrar_mensajes_de_storage.png)
+
 ## Estructura
 
 | Ruta | Descripción |
