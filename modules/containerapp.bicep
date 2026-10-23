@@ -1,4 +1,4 @@
-// Entorno de Container Apps (plan de consumo) y el job programado del extractor.
+// Entorno de Container Apps (plan de consumo) y el job del extractor (ejecución manual).
 
 param location string
 param tags object
@@ -9,9 +9,6 @@ param identityId string
 param identityClientId string
 param keyVaultUri string
 param blobEndpoint string
-
-@description('Todos los días a las 06:00 UTC (01:00 en Lima)')
-param cronExpression string = '0 6 * * *'
 
 resource logs 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
   name: 'log-conversations'
@@ -53,11 +50,10 @@ resource job 'Microsoft.App/jobs@2024-03-01' = if (deployJob) {
   properties: {
     environmentId: environment.id
     configuration: {
-      triggerType: 'Schedule'
+      triggerType: 'Manual'
       replicaTimeout: 600
       replicaRetryLimit: 1
-      scheduleTriggerConfig: {
-        cronExpression: cronExpression
+      manualTriggerConfig: {
         parallelism: 1
         replicaCompletionCount: 1
       }
